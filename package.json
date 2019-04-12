@@ -1,0 +1,23 @@
+{
+  "name": "product_website",
+  "version": "1.0.0",
+  "description": "A website to sell things",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Tristan",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
+    "express-pug": "^1.0.0",
+    "express-session": "^1.16.1",
+    "express-validator": "^5.3.1",
+    "mongoose": "^5.5.1",
+    "mongoose-unique-validator": "^2.0.2",
+    "nodemon": "^1.18.11",
+    "pug": "^2.0.3"
+  }
+}

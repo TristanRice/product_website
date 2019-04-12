@@ -1,0 +1,45 @@
+extends base.pug
+
+block content
+	if errors
+		for error in errors
+			div(class="alert alert-danger")
+				| #{error.msg}
+	form(method="GET", action="/addToCart")
+
+		div(class="conatiner", style="margin-left: 20%; margin-right:20%;")
+			div(class="row", style="height: 40%")
+				div(class="col")
+					img(src=`/img/${product.image}`, style="width: 100%;")
+				div(class="col")
+					div(style="height: 20%;")
+						p
+							| #{product.title}
+					div(style="height: 20%;")
+						p
+							| $#{product.price}
+					div(style="height: 20%;")
+							div(class="form-group row")
+								label(for="item_quantity", class="col-2 col-form-label")
+									| Quantity
+								div(class="col-10")
+									input(class="form-control", type="number", value="1", id="item_quantity", name="item_quantity")
+
+							input(type="hidden", name="productId", value=`${product._id}`)
+					div(style="height: 20%;")
+						div(class="btn-group btn-group-toggle", data-toggle="buttons")
+							for Category in product.categories
+								label(class="btn btn-outline-primary", for=`${Category.name}`)
+									input(type="radio", name="category", id=`${Category.name}`, autocomplete="off", value=`${Category.name}`)
+									| #{Category.name}
+					
+					if product.sizes
+						div(style="height: 20%;")
+							div(class="btn-group btn-group-toggle", data-toggle="buttons")
+									for Size in product.sizes
+										label(class="btn btn-outline-primary", for=`${Size.size}`)
+											input(type="radio", name="size", id=`${Size.size}`, autocomplete="off", value=`${Size.size}`)
+											| #{Size.size}
+					div(style="height: 20%;")
+						button(type="submit", class="btn btn-outline-primary")
+							| &nbsp; Add to cart

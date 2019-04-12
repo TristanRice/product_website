@@ -1,0 +1,69 @@
+[
+	{
+		"title": "Management",
+		"description": "We will manage your social media for you",
+		"price": 100,
+		"image": "social_networks.jpg",
+		"categories": [
+			{
+				"name": "Facebook",
+				"id": 1
+			},
+			{
+				"name": "Instagram",
+				"id": 2
+			},
+			{
+				"name": "Twitter",
+				"id": 3
+			},
+			{
+				"name": "Snapchat",
+				"id": 4
+			}
+		]
+	},
+	{
+		"title": "WebPages",
+		"description": "We will make you a website",
+		"price": 300,
+		"image": "your_website.jpg",
+		"categories": [
+			{
+				"name": "Web Pages",
+				"id": 1
+			}
+		]
+	},
+	{
+		"title": "Apperal",
+		"description": "You can buy these clothes from us",
+		"price": 10,
+		"image": "tshirt.jpg",
+		"categories": [
+			{
+				"name": "Blue",
+				"id": 1
+			},
+			{
+				"name": "Red",
+				"id": 2
+			},
+			{
+				"name": "Green",
+				"id": 3
+			}
+		],
+		"sizes": [
+			{
+				"size": "small"
+			},
+			{
+				"size": "medium"
+			},
+			{
+				"size": "large"
+			}
+		]
+	}
+]
