@@ -1,5 +1,5 @@
 const router = require("express").Router( )
-	, products = require("../../models/product");
+	, products = require("../../models/product")
 	, { 
 		check, 
 		validationResult
@@ -8,28 +8,30 @@ const router = require("express").Router( )
 
 router.get("/addToCart", [
 
-	check.query("quantity")
+	check("item_quantity")
 		.not( ).isEmpty( )
 		.withMessage("You must enter a quantity")
-		.isNumber( )
+		.isNumeric	( )
 		.withMessage("invalid quantity value"),
 
-	check.query("category")
+	check("category")
 		.not( ).isEmpty( )
 		.withMessage("You must enter a category")
 
-]
+],
 
 function(req, res) {
 	let errors = validationResult(req).array( );
 
+	//first make sure that they are logged in
+	if (!req.session || !req.session.currentUser)
+		return res.redirect("/login");
+
 	if (errors.length)
-		return res.render("product", {
-			"errors": errors
-		});
+		return res.redirect(`/?error=${errors[0].msg}`)
 
 	let productId = req.query.productId;
-	let quantity  = req.query.quantity;
+	let quantity  = req.query.item_quantity;
 	let size      = req.query.size;
 	let category  = req.query.category;
 
@@ -42,16 +44,19 @@ function(req, res) {
 		if (!Product)
 			return res.redirect("page_404")
 
-		if ((!size && Products.size.length) || 
-			(size && !search(Products.sizes, size, "size")))
+		if ((!size && Product.size) || 
+			(size && Product.size && !search(Product.sizes, size, "size")))
 			errors.push({"msg": "That size is not valid"});
 
-		if (!search(Products.categories, category, "name"))
-			errors.push({"msg": "That category is not valid"})
+		if (!search(Product.categories, category, "name"))
+			errors.push({"msg": "That category is not valid"});
+
+		console.log(errors);
 
 		if (errors.length)
 			return res.render("product", {
-				"errors": errors
+				"errors": errors,
+				"product": Product
 			});
 		
 		if (!req.session.shopping_cart)
@@ -66,7 +71,7 @@ function(req, res) {
 			}});
 		req.session.save( );
 		
-		return res.redirect("/");
+		return res.redirect(`/?success=Successfully added ${Product.title} to cart`);
 	});
 });
 

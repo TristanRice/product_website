@@ -1,0 +1,38 @@
+extends base.pug
+
+block content
+	if errors
+		for error in errors
+			div(class="alert alert-danger")
+				| #{error.msg}
+
+	else
+		div(class="container")
+			if shopping_cart
+				for Order in shopping_cart
+					div(class="row")
+						for Product, index in Order
+							if index == "Product"
+								div(class="col")
+									img(src=`/img/${Product.image}`, style="width: 100%;")
+
+							if index == "Product"
+								div(class="col", style="width: 5%;")
+
+									div(style="height: 20%;")
+										b
+											| #{Product.title}
+									div(style="height: 20%;")
+										p
+											| $#{Product.price}
+
+									div(style="height: 20%;")
+										p
+											| Category: #{Order.options.category}
+
+									if Order.options.size
+										div(style="height: 20%;")
+											p
+												| Size: #{Order.options.size}
+
+		

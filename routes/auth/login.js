@@ -2,31 +2,38 @@ const router = require("express").Router( )
 	, User   = require("../../models/user");
 
 router.get("/login", function(req, res) {
-	res.render("auth");
+	if (req.query.error) {
+		return res.render("login", {
+			"errors": [{"msg": req.query.error}]
+		});
+	}
+
+	res.render("login");
 })
 
 router.post("/login", function(req, res) {
-	const username = req.body.username;
+	const email = req.body.email;
 	const password = req.body.password;
 
 	const redirect = req.query.nextPage ? req.query.nextPage: "/";
 
-	User.findOne({username: username}, function(err, User) {
+
+	User.find({"email": email}, function(err, User) {
 		if (err)
-			return res.render("auth", {
+			return res.render("login", {
 				errors: {"msg": ["There was an error on our side, please try again"]}
 			});
 
-		if (!User.verifyPassword(password)) {
-			return res.render("auth", {
-				errors: {"msg": ["Wrong username or password"]}
+		if (!User.length || User[0].password !== password) {
+			return res.render("login", {
+				errors: [{"msg": "Wrong email or passwordd"}]
 			});
 		}
 
-		req.session.currentUser = User;
+		req.session.currentUser = User[0];
 		req.session.save( );
 
-		return resredirect(redirect);
+		return res.redirect(redirect);
 	});
 });
 

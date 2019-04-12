@@ -2,8 +2,14 @@ extends base.pug
 
 block content
 	if success
-		div(class="alert alert-success")
-			| #{success}
+		for single_success in success
+			div(class="alert alert-success")
+				| #{single_success.msg}
+	if errors
+		for error in errors
+			div(class="alert alert-danger")
+				| #{error.msg}
+
 	div(class="conatiner", style="margin-left: 20%; margin-right:20%;")
 		div(class="row")
 			if products

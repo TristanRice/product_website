@@ -1,0 +1,27 @@
+extends base.pug
+
+block content
+
+	if errors
+		for error in errors
+			div(class="alert alert-danger")
+				| #{error.msg}
+	div(class="container")
+		form(method="post", action="")
+			div(class="form-group")
+				label(for="exampleInputEmail1")
+					| address
+				input(type="email", class="form-control", id="exampleInputEmail1", name="email", placeholder="Enter email")
+				div(class="form-group")
+					label(for="exampleInputPassword1")
+						| PostCode
+					input(type="password", class="form-control", name="password", id="exampleInputPassword1", placeholder="Password")
+
+				div(class="form-group")
+					label(for="exampleInputPassword1")
+						| Password
+					input(type="password", class="form-control", name="password", id="exampleInputPassword1", placeholder="Password")
+
+				button(type="submit", class="btn btn-primary")
+					| Submit
+

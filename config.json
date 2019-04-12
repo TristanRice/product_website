@@ -2,5 +2,5 @@
 	"database_username": "root",
 	"database_password": "8WJFYZDvR7fzGNZjRuFXx3tn6qj5gs",
 	"database_name": "shoppingwebsite",
-	"port": 80
+	"port": 8080
 }
