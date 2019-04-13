@@ -10,18 +10,19 @@ block content
 		form(method="post", action="")
 			div(class="form-group")
 				label(for="exampleInputEmail1")
-					| address
-				input(type="email", class="form-control", id="exampleInputEmail1", name="email", placeholder="Enter email")
-				div(class="form-group")
-					label(for="exampleInputPassword1")
-						| PostCode
-					input(type="password", class="form-control", name="password", id="exampleInputPassword1", placeholder="Password")
+					| Address
+				input(type="text", class="form-control", id="exampleInputEmail1", name="address", placeholder="Enter address")
 
-				div(class="form-group")
-					label(for="exampleInputPassword1")
-						| Password
-					input(type="password", class="form-control", name="password", id="exampleInputPassword1", placeholder="Password")
+			div(class="form-group")
+				label(for="exampleInputPassword1")
+					| PostCode
+				input(type="text", class="form-control", name="zipcode", id="exampleInputPassword1", placeholder="Enter postcode")
 
-				button(type="submit", class="btn btn-primary")
-					| Submit
+			div(class="form-group")
+				label(for="exampleInputPassword1")
+					| Card number
+				input(type="text", class="form-control", name="card", id="exampleInputPassword1", placeholder="Enter your card number")
+
+			button(type="submit", class="btn btn-primary")
+				| Submit
 

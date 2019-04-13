@@ -32,5 +32,11 @@ const OrderSchema = new mongoose.Schema({
 
 	card_number: {
 		type: String
+	},
+
+	email: {
+		type: String
 	}
 });
+
+module.exports = mongoose.model("Order", OrderSchema	);

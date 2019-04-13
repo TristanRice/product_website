@@ -23,7 +23,7 @@ const ProductSchema = new mongoose.Schema({
     */
 	average_rating: {
 		type: Number,
-		default: 0,
+		default: 1,
 		required: false
 	},
 
@@ -82,10 +82,12 @@ const ProductSchema = new mongoose.Schema({
 });
 
 ProductSchema.methods.calculateNewStarRating = function(rating) {
-	current_rating = this.average_rating;
-
-	nr = ((current_rating*this.number_of_raters)+
-		   rating)/this.number_of_raters+1
+	let current_rating = parseInt(this.average_rating);
+	let number_of_raters = parseInt(this.number_of_raters);
+	
+	nr = ((current_rating*number_of_raters)+rating)
+		  /(number_of_raters+1)
+	console.log("New Rating: "+nr)
 	this.average_rating = nr;
 	this.number_of_raters++;
 }

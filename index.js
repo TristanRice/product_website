@@ -21,7 +21,7 @@ app.set("views", "./views");
 
 app.use(cookie( ));
 app.use(session({
-	secret: "tH1s-1S-mY-s3Cr3T",
+	secret: config.app_secret,
 	resave: false,
 	saveUninitialized: true
 }));

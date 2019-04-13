@@ -2,6 +2,7 @@ const router = require("express").Router( )
 	, User   = require("../../models/user");
 
 router.get("/login", function(req, res) {
+	//
 	if (req.query.error) {
 		return res.render("login", {
 			"errors": [{"msg": req.query.error}]
@@ -14,6 +15,8 @@ router.get("/login", function(req, res) {
 router.post("/login", function(req, res) {
 	const email = req.body.email;
 	const password = req.body.password;
+
+	//sometimes I will want to redirect the user back to the page that they were currently on.
 
 	const redirect = req.query.nextPage ? req.query.nextPage: "/";
 
@@ -30,6 +33,7 @@ router.post("/login", function(req, res) {
 			});
 		}
 
+		//save the user object to the session 
 		req.session.currentUser = User[0];
 		req.session.save( );
 
